@@ -5,6 +5,7 @@ export const Goodbye: Command = {
     name: "goodbye",
     description: "Returns a farewell",
     type: ApplicationCommandType.ChatInput,
+    
     run: async (client: Client, interaction: CommandInteraction) => {
         const content = "See you later!";
         
