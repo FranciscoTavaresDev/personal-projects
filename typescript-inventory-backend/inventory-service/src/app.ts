@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
 
 // start the server
 app.listen(config.BACK_PORT, () => {
-  console.log(`Server is running on: http://${config.BACK_HOST}:${config.BACK_PORT}`)
+  console.log(`Server is running on: http://localhost:${config.BACK_PORT}`)
 })
