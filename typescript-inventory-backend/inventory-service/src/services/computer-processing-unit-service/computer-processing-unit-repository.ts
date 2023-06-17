@@ -1,6 +1,7 @@
 import { Exception } from '@tsed/exceptions'
 import { type Repository } from 'typeorm'
 import { myDataSource } from '../../app-data-source'
+import { CustomErrorModel } from '../common/models/error'
 import { ComputerProcessingUnit } from './models/computer-processing-unit'
 
 export class ComputerProcessingUnitRepository {
@@ -10,11 +11,11 @@ export class ComputerProcessingUnitRepository {
     this._repo = myDataSource.getRepository(ComputerProcessingUnit)
   }
 
-  public async findAll (): Promise<ComputerProcessingUnit[]> {
+  public async findAll (): Promise<ComputerProcessingUnit[] | CustomErrorModel> {
     try {
       return await this._repo.find()
     } catch (err) {
-      throw new Exception(400, 'Could not return CPUs')
+      return new CustomErrorModel(400, 'Something went wrong, could not get CPUs.')
     }
   }
 }

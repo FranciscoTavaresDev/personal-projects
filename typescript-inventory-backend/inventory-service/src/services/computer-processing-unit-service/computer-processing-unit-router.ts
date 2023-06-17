@@ -48,16 +48,9 @@ computerProcessingUnitRoute.get('/cpu', async (req: Request, res: Response): Pro
       message: 'You have successfully returned all existing CPU models.'
     })
   } catch (err) {
-    if (err instanceof Exception) {
-      res.json({
-        ...err
-      })
-    } else {
-      res.json({
-        status: 400,
-        message: 'Something went wrong fetching all existing CPU models.'
-      })
-    }
+    res.json({
+      
+    })
   }
 })
 
