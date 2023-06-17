@@ -2,11 +2,13 @@ import config from './config/config'
 import express from 'express'
 import { myDataSource } from './app-data-source'
 import { computerProcessingUnitRoute } from './services/computer-processing-unit-service/computer-processing-unit-router'
+import cors from 'cors'
 
 // create and setup express app
 export const app = express()
 app.use(express.json())
 app.use(computerProcessingUnitRoute)
+app.use(cors());
 
 // establish database connection
 myDataSource

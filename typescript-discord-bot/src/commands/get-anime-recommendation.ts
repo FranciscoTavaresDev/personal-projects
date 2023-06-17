@@ -2,28 +2,16 @@ import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandO
 import { getAnimeList, getAnimeSuggestion } from "../external/my-anime-list";
 import { Command } from "../command";
 
-export const GetAnime: Command = {
-    name: 'get-anime',
-    description: 'Returns animes based on the provided name.',
+export const GetRecommendedAnime: Command = {
+    name: 'get-anime-recommendation',
+    description: 'Returns recommended animes.',
     type: ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: 'anime-name',
-            description: 'The name of the desired anime you which to search for.',
-            type: ApplicationCommandOptionType.String
-        },
-        {
-            name: 'nr-of-results',
-            description: 'The number of the desired results.',
-            type: ApplicationCommandOptionType.Number,
-            required: false
-        }
-    ],
+    options: [],
     run: async (_client: Client, interaction: CommandInteraction) => {
-        const animeName = interaction.options.data[0]?.value as string;
-        const nrOfResults = interaction.options.data[1]?.value as number;
 
-        var anime = await getAnimeList(animeName, nrOfResults);
+        var anime = await getAnimeSuggestion();
+
+        anime.data.
 
         for (const item of anime) {
             const body = `
@@ -38,6 +26,7 @@ export const GetAnime: Command = {
                 ephemeral: true,
                 content: body,
             });
-        };  
+        };
+
     }
 };
