@@ -9,7 +9,7 @@ export default (client: Client): void => {
 
         await client.application.commands.set(Commands);
 
-        const channel = await client.channels.fetch('780400089696174135') as TextChannel;
+        const channel: TextChannel = await client.channels.fetch(process.env.DISCORD_CHANNEL as string) as TextChannel;
 
         channel.send('Saber is online and ready to padoru!');
     });

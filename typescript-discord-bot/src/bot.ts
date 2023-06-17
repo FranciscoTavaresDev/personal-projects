@@ -7,8 +7,6 @@ dotenv.config({ path: __dirname+'/.env' });
 
 console.log("Bot is starting...");
 
-const token = process.env.DISCORD_TOKEN;
-
 const client = new Client({
     intents: []
 });
@@ -16,7 +14,5 @@ const client = new Client({
 ready(client);
 interactionCreate(client);
 
-
-client.login(token);
-
+client.login(process.env.DISCORD_TOKEN);
 console.log("Bot is ready!")
