@@ -7,6 +7,13 @@ export async function getAnimeList(animeName: string, nrOfResults: number = 5) {
         limit: nrOfResults
     });
 
+    return anime.data;
+}
+
+export async function getAnimeSuggestion() {
+ 
+    const anime = await Jikan4.animeRecommendations()
+
     return anime;
 }
 

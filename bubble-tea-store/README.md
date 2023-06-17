@@ -4,11 +4,11 @@ Bubble Tea Store is a personal project which will consist in a Whatsapp chatbot.
 
 ## Installation
 
-Nothing of note yet
+Nothing needed.
 
 ## Usage
 
-Whatsapp chat bot.
+Backend for a bubble tea store.
 
 ## Contributing
 
