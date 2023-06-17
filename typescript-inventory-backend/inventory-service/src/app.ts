@@ -1,6 +1,6 @@
 import config from './config/config'
 import express from 'express'
-// import { myDataSource } from './app-data-source'
+import { myDataSource } from './app-data-source'
 import { computerProcessingUnitRoute } from './services/computer-processing-unit-service/computer-processing-unit-router'
 
 // create and setup express app
@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(computerProcessingUnitRoute)
 
 // establish database connection
-/* myDataSource
+myDataSource
   .initialize()
   .then(() => {
     console.log('Data Source has been initialized!')
@@ -17,7 +17,6 @@ app.use(computerProcessingUnitRoute)
   .catch((err) => {
     console.error('Error during Data Source initialization:', err)
   })
-  */
 
 // start the server
 app.listen(config.BACK_PORT)
