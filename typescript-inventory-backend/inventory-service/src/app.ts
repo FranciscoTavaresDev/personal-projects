@@ -8,7 +8,7 @@ import cors from 'cors'
 export const app = express()
 app.use(express.json())
 app.use(computerProcessingUnitRoute)
-app.use(cors());
+app.use(cors())
 
 // establish database connection
 myDataSource

@@ -1,64 +1,37 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
-import uuid from 'uuidv4'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class ComputerProcessingUnit {
-  @PrimaryColumn({
-    name: 'id',
-    type: 'varchar'
-  })
-    id: string = uuid.uuid()
+  @PrimaryGeneratedColumn()
+    id!: number
 
   @Column('text')
-    name: string
+    name!: string
 
   @Column('text')
-    maker: string
+    maker!: string
 
   @Column('text')
-    model: string
+    model!: string
 
   @Column('text')
-    socketType: string
+    socketType!: string
 
   @Column('numeric')
-    clockSpeed: number
+    clockSpeed!: number
 
   @Column('numeric')
-    hostBusSpeed: number
+    hostBusSpeed!: number
 
   @Column('text')
-    cache: string
+    cache!: string
 
   @Column('numeric')
-    processSize: number
+    processSize!: number
 
   @Column('numeric')
-    energyConsumption: number
+    energyConsumption!: number
 
   @Column('numeric')
-    price: number
-
-  constructor (
-    name: string,
-    maker: string,
-    model: string,
-    socketType: string,
-    clockSpeed: number,
-    hostBusSpeed: number,
-    cache: string,
-    processSize: number,
-    energyConsumption: number,
-    price: number) {
-    this.name = name
-    this.maker = maker
-    this.model = model
-    this.socketType = socketType
-    this.clockSpeed = clockSpeed
-    this.hostBusSpeed = hostBusSpeed
-    this.cache = cache
-    this.processSize = processSize
-    this.energyConsumption = energyConsumption
-    this.price = price
-  }
+    price!: number
 }

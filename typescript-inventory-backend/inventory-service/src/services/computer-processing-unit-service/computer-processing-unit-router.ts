@@ -3,7 +3,6 @@ import express, { type Request, type Response } from 'express'
 import { myDataSource } from '../../app-data-source'
 import { ComputerProcessingUnit } from './models/computer-processing-unit'
 import { ComputerProcessingUnitController } from './computer-processing-unit-controller'
-import { Exception } from '@tsed/exceptions'
 
 export const computerProcessingUnitRoute = express.Router()
 
@@ -25,16 +24,10 @@ computerProcessingUnitRoute.post('/cpu', async (req: Request, res: Response): Pr
       message: 'You have successfully added a new CPU model to the inventory.'
     })
   } catch (err) {
-    if (err instanceof Exception) {
-      res.json({
-        ...err
-      })
-    } else {
-      res.json({
-        status: 400,
-        message: 'Something went wrong while adding a new CPU model.'
-      })
-    }
+    res.json({
+      status: 500,
+      message: 'Something went wrong.'
+    })
   }
 })
 
@@ -49,7 +42,8 @@ computerProcessingUnitRoute.get('/cpu', async (req: Request, res: Response): Pro
     })
   } catch (err) {
     res.json({
-      
+      status: 500,
+      message: 'Something went wrong.'
     })
   }
 })
