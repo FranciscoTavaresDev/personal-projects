@@ -1,37 +1,31 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { v4 } from 'uuid'
 
-@Entity()
+@Entity({ name: 'ComputerProcessingUnit', synchronize: true })
 export class ComputerProcessingUnit {
-  @PrimaryGeneratedColumn()
-    id!: number
+  @PrimaryColumn('uuid')
+    id: string = v4().toString()
 
   @Column('text')
-    name!: string
+    maker: string
 
   @Column('text')
-    maker!: string
+    model: string
 
   @Column('text')
-    model!: string
-
-  @Column('text')
-    socketType!: string
+    socketType: string
 
   @Column('numeric')
-    clockSpeed!: number
+    price: number
 
-  @Column('numeric')
-    hostBusSpeed!: number
+  public getName (): string {
+    return `${this.maker} ${this.model}`
+  }
 
-  @Column('text')
-    cache!: string
-
-  @Column('numeric')
-    processSize!: number
-
-  @Column('numeric')
-    energyConsumption!: number
-
-  @Column('numeric')
-    price!: number
+  constructor (maker: string, model: string, socketType: string, price: number) {
+    this.maker = maker
+    this.model = model
+    this.socketType = socketType
+    this.price = price
+  }
 }

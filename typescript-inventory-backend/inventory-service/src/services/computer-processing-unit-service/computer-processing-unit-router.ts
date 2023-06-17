@@ -1,27 +1,22 @@
-import { plainToInstance } from 'class-transformer'
 import express, { type Request, type Response } from 'express'
 import { myDataSource } from '../../app-data-source'
 import { ComputerProcessingUnit } from './models/computer-processing-unit'
 import { ComputerProcessingUnitController } from './computer-processing-unit-controller'
+import { type ComputerProcessingUnitInterface } from './interface/computer-processing-unit-interface'
 
 export const computerProcessingUnitRoute = express.Router()
 
 const controller = new ComputerProcessingUnitController()
 
 computerProcessingUnitRoute.post('/cpu', async (req: Request, res: Response): Promise<void> => {
-  const cpu: ComputerProcessingUnit = plainToInstance(
-    ComputerProcessingUnit,
-    req.body as ComputerProcessingUnit,
-    { excludeExtraneousValues: true }
-  )
+  const payload = req.body as ComputerProcessingUnitInterface
+  const cpu: ComputerProcessingUnit = new ComputerProcessingUnit(payload.maker, payload.model, payload.socketType, payload.price)
 
   try {
     const savedCpu = await myDataSource.getRepository(ComputerProcessingUnit).save(cpu)
 
     res.json({
-      ...savedCpu,
-      status: 201,
-      message: 'You have successfully added a new CPU model to the inventory.'
+      ...savedCpu
     })
   } catch (err) {
     res.json({
@@ -36,9 +31,7 @@ computerProcessingUnitRoute.get('/cpu', async (req: Request, res: Response): Pro
     const cPUs = await controller.getCPUs()
 
     res.json({
-      ...cPUs,
-      status: 200,
-      message: 'You have successfully returned all existing CPU models.'
+      cPUs
     })
   } catch (err) {
     res.json({
