@@ -20,6 +20,14 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+      
+  app:
+    depends_on:
+      - db
+    build: ./inventory-service
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
 # Names our volume
 volumes:
   my-db:

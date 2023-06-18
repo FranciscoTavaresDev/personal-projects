@@ -5,6 +5,7 @@
   "main": "../app.ts",
   "scripts": {
     "start": "eslint src/**/*.ts --fix && ts-node src/app.ts",
+    "start-prod": "ts-node src/app.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"

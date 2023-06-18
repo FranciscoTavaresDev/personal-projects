@@ -1,7 +1,8 @@
 FROM node:18-alpine
 ENV NODE_ENV=develop
-WORKDIR /typescript-inventory-backend
+WORKDIR /src
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --develop
 COPY . .
-CMD ["node", "app.ts"]
+EXPOSE 8080
+CMD ["npm", "start"]
