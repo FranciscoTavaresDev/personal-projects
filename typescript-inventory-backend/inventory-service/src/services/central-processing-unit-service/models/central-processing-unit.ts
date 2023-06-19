@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryColumn } from 'typeorm'
 import { v4 } from 'uuid'
 
 @Entity({ name: 'ComputerProcessingUnit', synchronize: true })
-export class ComputerProcessingUnit {
+export class CentralProcessingUnit {
   @PrimaryColumn('uuid')
     id: string = v4().toString()
 

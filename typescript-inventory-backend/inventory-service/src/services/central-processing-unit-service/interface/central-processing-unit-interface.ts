@@ -1,4 +1,4 @@
-export interface ComputerProcessingUnitInterface {
+export interface CentralProcessingUnitInterface {
   maker: string
   model: string
   socketType: string
