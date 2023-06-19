@@ -1,5 +1,4 @@
 import express, { type Request, type Response } from 'express'
-import { myDataSource } from '../../app-data-source'
 import { CentralProcessingUnit } from './models/central-processing-unit'
 import { CentralProcessingUnitController } from './central-processing-unit-controller'
 import { type CentralProcessingUnitInterface } from './interface/central-processing-unit-interface'
@@ -13,7 +12,7 @@ centralProcessingUnitRoute.post('/cpu', async (req: Request, res: Response): Pro
   const cpu: CentralProcessingUnit = new CentralProcessingUnit(payload.maker, payload.model, payload.socketType, payload.price)
 
   try {
-    const savedCpu = await myDataSource.getRepository(CentralProcessingUnit).save(cpu)
+    const savedCpu = await controller.createCpu(cpu)
 
     res.json({
       ...savedCpu
@@ -28,10 +27,10 @@ centralProcessingUnitRoute.post('/cpu', async (req: Request, res: Response): Pro
 
 centralProcessingUnitRoute.get('/cpu', async (req: Request, res: Response): Promise<void> => {
   try {
-    const cPUs = await controller.getCPUs()
+    const cpus = await controller.getCpus()
 
     res.json({
-      cPUs
+      cpus
     })
   } catch (err) {
     res.json({
@@ -41,10 +40,18 @@ centralProcessingUnitRoute.get('/cpu', async (req: Request, res: Response): Prom
   }
 })
 
-centralProcessingUnitRoute.get('/cpu/:cpuId', (req: Request, res: Response): void => {
-  res.json({
-    status: 200,
-    success: true,
-    message: 'You are searching for a specific CPU.'
-  })
+centralProcessingUnitRoute.get('/cpu/:id', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: string = req.params.id
+    const cpu = await controller.getCpuById(id)
+
+    res.json({
+      cpu
+    })
+  } catch (err) {
+    res.json({
+      status: 500,
+      message: 'Something went wrong.'
+    })
+  }
 })
