@@ -2,6 +2,7 @@ import express, { type Request, type Response } from 'express'
 import { CentralProcessingUnit } from './models/central-processing-unit'
 import { CentralProcessingUnitController } from './central-processing-unit-controller'
 import { type CentralProcessingUnitInterface } from './interface/central-processing-unit-interface'
+import { NotFound } from '@tsed/exceptions'
 
 export const centralProcessingUnitRoute = express.Router()
 
@@ -49,6 +50,11 @@ centralProcessingUnitRoute.get('/cpu/:id', async (req: Request, res: Response): 
       cpu
     })
   } catch (err) {
+    if (err instanceof NotFound) {
+      res.json({
+        err
+      })
+    }
     res.json({
       status: 500,
       message: 'Something went wrong.'

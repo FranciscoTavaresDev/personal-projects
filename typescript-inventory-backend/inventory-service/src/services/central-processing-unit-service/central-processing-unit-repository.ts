@@ -1,7 +1,7 @@
 import { type Repository } from 'typeorm'
 import { myDataSource } from '../../app-data-source'
 import { CentralProcessingUnit } from './models/central-processing-unit'
-import { Exception } from '@tsed/exceptions'
+import { NotFound } from '@tsed/exceptions'
 
 export class CentralProcessingUnitRepository {
   private readonly _repo: Repository<CentralProcessingUnit>
@@ -18,7 +18,7 @@ export class CentralProcessingUnitRepository {
     const cpu = await this._repo.findOne({ where: { id } })
 
     if (cpu == null) {
-      throw new Exception(404, 'No CPU matching given id')
+      throw new NotFound('No CPU matching given id')
     }
 
     return cpu
